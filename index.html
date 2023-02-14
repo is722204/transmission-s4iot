@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S4IOT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <script src="https://unpkg.com/html5-qrcode@2.3.6/html5-qrcode.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        .centrar {
+            width: 50%;
+            text-align-last: center;
+        }
+        .form-select {
+            background: #ffffff00;
+            border: none;
+            color: #5038c8;
+            font-weight: bold;
+        }
+
+        .camara {
+            background: #606060;
+            border-color: #606060;
+            border-radius: 7px;
+        }
+
+        p {
+            color: #6a6a6a
+        }
+
+
+        body {
+            background: #f2f2f2;
+        }
+
+
+        .bg {
+            width: 200px;
+            height: 200px;
+            border-radius: 100%;
+            background: #ccc;
+            position: relative;
+            margin: 20px auto;
+        }
+
+        .text {
+            width: 160px;
+            height: 160px;
+            line-height: 160px;
+            text-align: center;
+            font-size: 34px;
+            color: rgb(0, 0, 0);
+            border-radius: 100%;
+            background: #fff;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .card {
+            /* border: outset; */
+            border-top-left-radius: .5rem;
+            border-top-right-radius: .5rem;
+            border-bottom-right-radius: .75rem;
+            border-bottom-left-radius: .75rem;
+            border: 1px solid #ccc;
+        }
+
+        .redondo {
+            border-radius: .5rem;
+        }
+
+        .centrar {
+            align-items: center;
+        }
+
+        .todo {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light justify-content-center pt-4 "
+        style="background-color: rgb(255, 255, 255); border-bottom: groove;">
+        <img src="https://s4iot.com/site/wp-content/uploads/2022/06/LogoBlu.png" width="70" height="40">
+    </nav>
+
+    <nav class="navbar navbar-expand-lg navbar-light justify-content-center pt-4">
+        <div class="d-flex align-items-center centrar">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            <select id="deviceActive" class="form-select">
+                <option selected>Ingusa</option>
+                <option>Rochester</option>
+                <option>Remote Ready</option>
+            </select>
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        </div>
+    </nav>
+
+
+    <div class="row" style="width: 100%; margin: auto;">
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <div class="card m-2 shadow">
+                        <div class="m-1 redondo d-flex justify-content-between" style="text-align: left;">
+                            <p class="mt-1 card-title p-2" style="color: rgb(0, 0, 0); font-weight: bold;">Transmisión
+                                manual</p>
+                        </div>
+                        <div class="card-body align-self-center p-4">
+                            <div class="row">
+                                <!-- <div class="mb-4">
+                                <p class="mb-1">Escanear QR</p>
+                                <button type="button" class="btn btn-primary w-50 camara">Abrir cámara</button>
+                            </div> -->
+                                <div class="mb-4">
+                                    <p class="mb-1">Key del dispositivo</p>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Key" id="key">
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <p class="mb-1">Valor en carátula</p>
+                                    <div class="input-group mb-3">
+                                        <input type="number" class="form-control" min="0" max="100" step="1" value="0"
+                                            id="valor">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <p class="mb-1">Tipo de carátula</p>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="col form-check m-2">
+                                            <input class="form-check-input mt-4" type="radio" name="flexRadioDefault"
+                                                checked id="ingusa">
+                                            <div class="row text-center ">
+                                                <div class="col">
+                                                    <img src="https://gas.s4iot.com/assets/images/caratula_ingusa.png"
+                                                        alt="" srcset="">
+                                                    <p>Ingusa</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col form-check m-2">
+                                            <input class="form-check-input mt-4" type="radio" name="flexRadioDefault"
+                                                id="rrr">
+                                            <div class="row text-center">
+                                                <div class="col">
+                                                    <img src="https://gas.s4iot.com/assets/images/caratula_rochester_remote.png"
+                                                        alt="" srcset="">
+                                                    <p>RRR</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col form-check m-2">
+                                            <input class="form-check-input mt-4" type="radio" name="flexRadioDefault"
+                                                id="re">
+                                            <div class="row text-center">
+                                                <div class="col">
+                                                    <img src="https://gas.s4iot.com/assets/images/caratula_rochester_estandar.png"
+                                                        alt="" srcset="">
+                                                    <p>RE</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-primary w-75 camara"
+                                            onclick="sendTransmission()">Enviar transmisión</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function getCaratul() {
+            let caratul = ["ingusa", "re", "rrr"]
+            let checked = [document.querySelector("#ingusa").checked, document.querySelector("#re").checked, document
+                .querySelector("#rrr").checked
+            ]
+            return caratul[checked.findIndex(e => e)]
+        }
+
+
+        function percentToRaw(caratul, percen) {
+            console.log(percen,caratul)
+            let valores = [0, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 89, 90, 95, 100] //valores en porcentaje
+            //CARÁTULAS
+            let re = [54, 428, 687, 948, 1149, 1517, 1810, 2067, 2320, 2591, 2909, 3117, 3386, 3692,
+                3994
+            ] //Rochester Estandar
+            let rrr = [196, 464, 735, 1007, 1211, 1536, 1799, 2050, 2313, 2576, 2935, 3140, 3416, 3731,
+                3858
+            ] //Rochester Remote Ready
+            let ingusa = [34, 239, 659, 849, 1097, 1382, 1698, 1977, 2264, 2538, 2838, 3051, 3312, 3735, 3988]
+            let iusa = [51, 319, 689, 917, 1168, 1511, 1834, 2124, 2404, 2683, 2962, 3177, 3425, 3791, 3999]
+            let
+                magnetel4 = [1094, 1325, 3703, 9379, 13027, 15645, 17983, 20682, 23854, 26934, 30380, 33766, 37248,
+                    40575,
+                    43764, 46333, 48791, 50497, 52521, 55600, 59450, 59803, 59901
+                ]
+            let
+                magnetel8 = [1114, 1291, 1904, 7987, 12021, 14377, 16366, 18685, 21526, 24724, 27480, 31267, 35021,
+                    38536,
+                    41532, 45432, 47499, 49986, 52228, 55831, 61678, 62844, 62783
+                ]
+
+            if (caratul == "re") {
+                if (percen <= valores[0]) {
+                    return re[0];
+                } else if (percen >= valores[valores.length - 1]) {
+                    return re[re.length - 1];
+                }
+                valores.push(percen)
+                valores = valores.sort(function (a, b) {
+                    return a - b
+                })
+                let index = valores.indexOf(percen)
+                re.splice(index, 0, "x")
+                let gasBajo=((percen - valores[index - 1])/((valores[index + 1]-valores[index - 1])/(re[index + 1] - re[index - 1])))+re[index - 1]
+                return gasBajo || re[0]
+
+            } else if (caratul == "rrr") {
+                if (percen <= valores[0]) {
+                    return rrr[0];
+                } else if (percen >= valores[valores.length - 1]) {
+                    return rrr[rrr.length - 1];
+                }
+                valores.push(percen)
+                valores = valores.sort(function (a, b) {
+                    return a - b
+                })
+                let index = valores.indexOf(percen)
+                rrr.splice(index, 0, "x")            
+
+                let gasBajo=((percen - valores[index - 1])/((valores[index + 1]-valores[index - 1])/(rrr[index + 1] - rrr[index - 1])))+rrr[index - 1]
+                return gasBajo || rrr[0]
+            } else if (caratul == "ingusa") {
+                if (percen <= valores[0]) {
+                    return ingusa[0];
+                } else if (percen >= valores[valores.length - 1]) {
+                    return ingusa[ingusa.length - 1];
+                }
+                valores.push(percen)
+                valores = valores.sort(function (a, b) {
+                    return a - b
+                })
+                let index = valores.indexOf(percen)
+                ingusa.splice(index, 0, "x")
+                let gasBajo=((percen - valores[index - 1])/((valores[index + 1]-valores[index - 1])/(ingusa[index + 1] - ingusa[index - 1])))+ingusa[index - 1]
+
+                return gasBajo || ingusa[0]
+            } else if (caratul == "iusa") {
+                if (percen <= valores[0]) {
+                    return iusa[0];
+                } else if (percen >= valores[valores.length - 1]) {
+                    return iusa[iusa.length - 1];
+                }
+                valores.push(percen)
+                valores = valores.sort(function (a, b) {
+                    return a - b
+                })
+                let index = valores.indexOf(percen)
+                iusa.splice(index, 0, "x")
+                let gasBajo=((percen - valores[index - 1])/((valores[index + 1]-valores[index - 1])/(iusa[index + 1] - iusa[index - 1])))+iusa[index - 1]
+
+                return gasBajo || iusa[0]
+            } else if (caratul == "magnetel4") {
+                valores = [0, 3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 97, 100]
+                if (percen <= valores[0]) {
+                    return magnetel4[0];
+                } else if (percen >= valores[valores.length - 1]) {
+                    return magnetel4[magnetel4.length - 1];
+                }
+                valores.push(percen)
+                valores = valores.sort(function (a, b) {
+                    return a - b
+                })
+                let index = valores.indexOf(percen)
+                magnetel4.splice(index, 0, "x")
+                let gasBajo=((percen - valores[index - 1])/((valores[index + 1]-valores[index - 1])/(magnetel4[index + 1] - magnetel4[index - 1])))+magnetel4[index - 1]
+
+                return gasBajo || magnetel4[0]
+            } else if (caratul == "magnetel8") {
+                valores = [0, 3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 97, 100]
+                if (percen <= valores[0]) {
+                    return magnetel8[0];
+                } else if (percen >= valores[valores.length - 1]) {
+                    return magnetel8[magnetel8.length - 1];
+                }
+                valores.push(percen)
+                valores = valores.sort(function (a, b) {
+                    return a - b
+                })
+                let index = valores.indexOf(percen)
+                magnetel8.splice(index, 0, "x")
+                let gasBajo=((percen - valores[index - 1])/((valores[index + 1]-valores[index - 1])/(magnetel8[index + 1] - magnetel8[index - 1])))+magnetel8[index - 1]
+
+                return gasBajo || magnetel8[0]
+            }
+        }
+
+        function sendTransmission() {
+            let timestamp = new Date().getTime()
+            let raw = parseInt(percentToRaw(getCaratul(), parseInt(document.querySelector("#valor").value) || 0))
+            let trama = {
+                "SG": [{
+                    "value": raw,
+                    timestamp
+                }],
+                "IMEI": {
+                    "value": 0,
+                    timestamp
+                },
+                "SWV": {
+                    "value": 140,
+                    timestamp
+                },
+                "RSRP": {
+                    "value": -90,
+                    timestamp
+                },
+                "RSRQ": {
+                    "value": -15,
+                    timestamp
+                }
+            }
+            console.log(trama,document.querySelector("#key").value)
+            var url = "http://3.138.90.175:3003/transmission";
+            try {
+                axios.post(url, {key:document.querySelector("#key").value, trama }).then((success, err) => {
+                if (success) {
+                    Swal.fire(
+                    'Hecho',
+                    'Se ha transmitido correctamente',
+                    'success'
+                    )
+                } else {
+                    alert("No device found")
+                }
+                })
+            } catch (error) {
+                alert("No device found")
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- IOT CORE: ESPACIO -->
+<!-- PLATAFORMA: ESPACIO -->
